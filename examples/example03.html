@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Solo Table: example 02</title>
+	<title>Solo Table: example 03</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -49,10 +49,10 @@
 	<div class="row-fluid">
 		<div class="span12">
 
-			<h2>Example #2</h2>
+			<h2>Example #3</h2>
 
 			<p>
-				This example with pager and sortable columns
+				This example with filter
 			</p>
 
 			<!-- В этом элементе будет находиться наше AngularJS приложение -->
@@ -68,6 +68,8 @@
 					если первой - то сортироваться будут только данные текущей страницы
 				-->
 				<solo-table items-on-page = "10" make-sortable>
+
+					<input placeholder="Filter by all columns" type="text" name="id" ng-model="filter.">
 
 					<!--
 						Эта директива выступает провайдером данных
@@ -95,10 +97,9 @@
 						<!--
 
 						В атрибуте контроллера "original" содержатся все данные, предоставленные провайдером bindtabledata.
-						В атрибуте "filtered" - отфильтрованные данные, но т.к. у нас простейший пример и никаких фильтров нет,
-						то filtered идентичен original
+						В атрибуте "filtered" - данные из original, к которым применен фильтр
 						-->
-						<tr ng-repeat="item in filtered = original" >
+						<tr ng-repeat="item in filtered = (original | filter:filter)" >
 							<td><[item.id]></td>
 							<td><[item.name]></td>
 							<td><[item.address]></td>
