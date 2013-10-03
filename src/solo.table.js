@@ -4,7 +4,7 @@
 
 angular.module("solo.table", [])
 
-	.controller("SoloTableCtrl", ['$scope', '$filter', function ($scope){
+	.controller("SoloTableCtrl", ['$scope', function ($scope){
 
 		$scope.original = [];
 
@@ -260,6 +260,7 @@ angular.module("solo.table", [])
 	 * @example <tr ng-repeat="item in filtered = (original | filterByFields:filter:['id', 'login', 'name']">
 	 */
 	.filter("filterByFields", function(){
+
 		/**
 		 * @param items - Список фильтруемых записей
 		 * @param search - Искомая подстрока
@@ -273,16 +274,18 @@ angular.module("solo.table", [])
 			if (fields.length == 0)
 				throw Error("You have to define list of fields");
 
+			search = (''+search).toLowerCase();
+
 			var test = function(el, idx, array)
 			{
 				var compare = function(val, search)
 				{
-					search = (''+search).toLowerCase();
 					return (''+val).toLowerCase().indexOf(search) !== -1;
 				};
 
 				var result = false;
-				for (var i = 0; i < fields.length; i++)
+				var len = fields.length;
+				for (var i = 0; i < len; i++)
 				{
 					if (compare(el[fields[i]], search))
 					{
