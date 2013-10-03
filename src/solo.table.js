@@ -193,11 +193,10 @@ angular.module("solo.table", [])
 					var repeat = tr.attr("ng-repeat");
 					tr.attr("ng-repeat", repeat + " | pager:pager.currentPage:pager.onPage");
 				}
-
 				return {
-					preLink: function ($scope, element, attrs, controller)
+					pre: function preLink(scope, element, attrs)
 					{
-						$scope.pager.onPage = attrs.itemsOnPage;
+						scope.pager.onPage = parseInt(attrs.itemsOnPage);
 					}
 				};
 			}
