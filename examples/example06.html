@@ -67,7 +67,7 @@
 					если она расположена самой последней (как в этом примере), то сортировка будет по всем записям,
 					если первой - то сортироваться будут только данные текущей страницы
 				-->
-				<solo-table items-on-page = "10" make-sortable>
+				<solo-table items-on-page = "50" make-sortable>
 
 					<select ng-model="prefixModel" class="input">
 						<option value="">All prefixes</option>
@@ -88,6 +88,16 @@
 
 					<!-- Показываем данные пейджинга: сколько всего страниц, на какой находимся, сколько записей во всей таблице -->
 					<div>Page <[pager.currentPage]> of <[pager.foundPages]>. Total items:  <[pager.found]></div>
+					
+					
+					<!-- Здесь реализован переход по страницам -->
+					<div>
+						<a href="" ng-click="gotoFirstPage()">First page | </a>
+						<a href="" ng-click="gotoPrevPage()"> &larr;prev | </a>
+						<a href="" ng-click="gotoNextPage()">next &rarr; | </a>
+						<a href="" ng-click="gotoLastPage()">Last page </a>
+					</div>
+					<br/>
 
 					<!-- Эта таблица обязательно  должна присутствовать в директиве solo-table, что, в общем то, очевидно. -->
 					<table class="table table-striped table-bordered" >
@@ -123,6 +133,7 @@
 						<a href="" ng-click="gotoNextPage()">next &rarr; | </a>
 						<a href="" ng-click="gotoLastPage()">Last page </a>
 					</div>
+					<br/>
 
 				</solo-table>
 
