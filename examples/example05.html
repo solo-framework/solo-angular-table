@@ -138,6 +138,8 @@
 				if (!search)
 					return items;
 
+				search = parseInt(search);
+
 				var test = function(el, idx, array){
 					return el.year > search;
 				};

@@ -40,6 +40,9 @@ angular.module("solo.table", [])
 		};
 
 
+		/**
+		 * Переход на следующую страницу
+		 */
 		$scope.gotoNextPage = function()
 		{
 			if ($scope.pager.foundPages == $scope.pager.currentPage)
@@ -48,16 +51,25 @@ angular.module("solo.table", [])
 			$scope.pager.currentPage++;
 		};
 
+		/**
+		 * Переход на первую страницу
+		 */
 		$scope.gotoFirstPage = function ()
 		{
 			$scope.pager.currentPage = 1;
 		};
 
+		/**
+		 * Переход на последнюю страницу
+		 */
 		$scope.gotoLastPage = function ()
 		{
 			$scope.pager.currentPage = $scope.pager.foundPages;
 		};
 
+		/**
+		 * Переход на предыдущую страницу
+		 */
 		$scope.gotoPrevPage = function()
 		{
 			if ($scope.pager.currentPage == 1)
@@ -65,6 +77,11 @@ angular.module("solo.table", [])
 			$scope.pager.currentPage--;
 		};
 
+		/**
+		 * Обновление данных пейджера
+		 *
+		 * @param filteredCount
+		 */
 		$scope.updatePager = function(filteredCount)
 		{
 			$scope.pager.found = filteredCount;
@@ -72,6 +89,7 @@ angular.module("solo.table", [])
 			$scope.gotoFirstPage();
 		};
 
+		// следим за коллекцией отфильтрованных элементов
 		$scope.$watchCollection("filtered", function (list){
 			$scope.updatePager(list.length);
 		});
@@ -96,12 +114,6 @@ angular.module("solo.table", [])
 				$scope.order.Direction = true;
 			}
 		};
-
-		$scope.ping = function()
-		{
-			console.log("ping");
-		};
-
 	}])
 
 	.filter("pager", function(){
@@ -114,6 +126,14 @@ angular.module("solo.table", [])
 			return items.slice(offset, offset + onPage);
 		};
 	})
+	/**
+	 * Эта директива добавляет данные в таблицу
+	 *
+	 * Пример:
+	 * <div bindtabledata>
+	 * [{"id":0,"prefix":"Miss","name":"Alvah Gleason","address":"58707 Ophelia Field\nEast Lorena, LA 89754-9301"}]
+	 * </div>
+	 */
 	.directive("bindtabledata", function(){
 		return {
 			require: "?ngModel",
@@ -280,7 +300,8 @@ angular.module("solo.table", [])
 			{
 				var compare = function(val, search)
 				{
-					return (''+val).toLowerCase().indexOf(search) !== -1;
+					//return (''+val).toLowerCase().indexOf(search) !== -1;
+					return val.toString().toLowerCase().indexOf(search) !== -1;
 				};
 
 				var result = false;
