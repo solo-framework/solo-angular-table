@@ -21,8 +21,8 @@ angular.module("solo.table", [])
 		$scope.filtered = [];
 
 		$scope.order = {
-			Header: null,
-			Direction: false
+			header: null,
+			direction: false
 		};
 
 		$scope.tableHeaders = {};
@@ -37,6 +37,27 @@ angular.module("solo.table", [])
 			currentPage: 1,
 			found: 0,
 			foundPages: 0
+		};
+
+		/**
+		 * Режим сортировки:
+		 * 2 - только ASC и DESC
+		 * 3 - default, ASC и DESC
+		 *
+		 * @type {number}
+		 */
+		$scope.sortMode = 2;
+
+		/**
+		 * Установка режима сортировки
+		 * @param mode
+		 */
+		$scope.setSortMode = function(mode)
+		{
+			if (mode == "" || mode == null)
+				$scope.sortMode = 2;
+			else
+				$scope.sortMode = parseInt(mode);
 		};
 
 
@@ -100,19 +121,36 @@ angular.module("solo.table", [])
 		 */
 		$scope.orderTableBy = function(header){
 
-			if ($scope.order.Header == header && $scope.order.Direction == false)
+			if ($scope.sortMode == 2)
 			{
-				$scope.order.Header = null; // очистка сортировки.
+				// это для работы в 2-х режимах ASC и DESC
+				if ($scope.order.header == header && $scope.order.direction == false)
+				{
+					$scope.order.direction = true;
+				}
+				else
+				{
+					$scope.order.header = header;
+					$scope.order.direction = false;
+				}
 			}
-			else if ( $scope.order.Header == header )
+			if ($scope.sortMode == 3)
 			{
-				$scope.order.Direction = false;
+				if ($scope.order.header == header && $scope.order.direction == true)
+				{
+					$scope.order.header = null; // очистка сортировки.
+				}
+				else if ( $scope.order.header == header )
+				{
+					$scope.order.direction = true;
+				}
+				else
+				{
+					$scope.order.header = header;
+					$scope.order.direction = false;
+				}
 			}
-			else
-			{
-				$scope.order.Header = header;
-				$scope.order.Direction = true;
-			}
+
 		};
 	}])
 
@@ -177,6 +215,31 @@ angular.module("solo.table", [])
 			}
 		};
 	})
+
+	/**
+	 * Можно также указать направление сортировки по-умолчанию, возможные значения asc и desc.
+	 * Указать можно только у одной колонки.
+	 * Пример:
+	 * <th sort-flag='name' default-sort="asc">Name</th>
+	 */
+	.directive("defaultSort", function(){
+		return {
+			restrict: "A",
+			link: function (scope, elm, attrs, ngm)
+			{
+				if (attrs.sortFlag)
+				{
+					if ("asc" == attrs.defaultSort)
+						scope.order.direction = false;
+
+					if ("desc" == attrs.defaultSort)
+						scope.order.direction = true;
+
+					scope.order.header = attrs.sortFlag;
+				}
+			}
+		}
+	})
 	/**
 	 * Указывает, сколько записей д.б. на странице
 	 * Пример: <solo-table items-on-page = "20">
@@ -213,12 +276,14 @@ angular.module("solo.table", [])
 				// добавим возможность сортировки
 				var tr = angular.element( elm.find('tbody').children('tr')[0]);
 				var repeat = tr.attr("ng-repeat");
-				tr.attr("ng-repeat", repeat + " | orderBy:order.Header:order.Direction");
+				tr.attr("ng-repeat", repeat + " | orderBy:order.header:order.direction");
 
 				// следим за изменениями сортировки
 				return {
 					pre: function preLink(scope, elm, attrs)
 					{
+						scope.setSortMode(attrs.makeSortable);
+
 						scope.$watchCollection("order", function(){
 
 							var resetClasses = function()
@@ -230,16 +295,16 @@ angular.module("solo.table", [])
 								}
 							};
 
-							if (scope.order.Header == null && scope.order.Direction == false)
+							if (scope.order.header == null && scope.order.direction == true)
 							{
 								resetClasses();
 							}
-							else if (scope.order.Header)
+							else if (scope.order.header)
 							{
-								var el = scope.tableHeaders[scope.order.Header];
+								var el = scope.tableHeaders[scope.order.header];
 								if (!el)
 									return;
-								if (scope.order.Direction)
+								if (scope.order.direction)
 								{
 
 									resetClasses();

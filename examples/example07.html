@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Solo Table: example 02</title>
+	<title>Solo Table: example 07</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -49,11 +49,10 @@
 	<div class="row-fluid">
 		<div class="span12">
 
-			<h2>Example #2</h2>
+			<h2>Example #7</h2>
 
 			<p>
-				This example with pager and sortable columns. In this example you can sort data by Id and Name columns.<br/>
-				There are 2 mode of sorting. The first is ASC and DESC (this example). The second is DEFAULT, ASC and DESC (see example #8).
+				This example with pager and sortable columns. You can define a default sorting for a column using <strong>default-sort</strong> directive.
 			</p>
 
 			<!-- В этом элементе будет находиться наше AngularJS приложение -->
@@ -88,7 +87,12 @@
 							<!-- У каждой колонки, которую мы хотим сортировать,
 							нужно указать директиву sort-flag='имя_поля_из_bindtabledata' -->
 							<th sort-flag='id'>Id</th>
-							<th sort-flag='name'>Name</th>
+
+							<!--
+								Можно также указать направление сортировки по-умолчанию, возможные значения asc и desc.
+								Указать можно только у одной колонки.
+							-->
+							<th sort-flag='name' default-sort="asc">Name</th>
 							<th>Address</th>
 						</tr>
 						</thead>
@@ -128,7 +132,7 @@
 	// Здесь приведен код, упрощающий создание нового AngularJS приложения
 	// Создаем приложение с именем example01, вставляем его в элемент testApp,
 	// добавляем в него таблицу
-	AppFactory("testApp", "example02", ["solo.table"]);
+	AppFactory("testApp", "example07", ["solo.table"]);
 
 </script>
 
