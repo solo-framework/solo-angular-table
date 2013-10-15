@@ -1,83 +1,238 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
-    <title>Solo-angular-table by solo-framework</title>
-  </head>
+	<title>Solo-angular-table by solo-framework</title>
+</head>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Solo-angular-table</h1>
-        <h2>AngularJS HTML table (grid) with sorting, pagination and filters</h2>
-        <a href="https://github.com/solo-framework/solo-angular-table" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+<body>
+<header>
+	<div class="inner">
+		<h1>Solo-angular-table</h1>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+		<h2>AngularJS HTML table (grid) with sorting, pagination and filters</h2>
+		<a href="https://github.com/solo-framework/solo-angular-table" class="button">
+			<small>View project on</small>
+			GitHub</a>
+	</div>
+</header>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
 
-<pre><code>$ cd your_repo_root/repo_name
+			<h2>Что это?</h2>
+			<p>
+				AngularJS таблица (список) с сортировкой, фильтрами и пейджингом.
+			</p>
+
+			<h2>Какие цели преследовались?</h2>
+			<p>
+				<ul>
+					<li>Мы хотим разрабатывать прототип приложения быстро, нет времени на разработку серверной версии таблицы (списка) с сортировкой, фильтрами и постраничной навигацией.</li>
+					<li>Верстальщик не обязан знать AngularJS</li>
+					<li>Верстка таблицы должна максимально соответствовать обычному HTML, а не быть нагромождением директив</li>
+					<li>"Живой" поиск по списку, когда записи фильтруются по мере набора искомого текста</li>
+					<li>Возможность написать свой фильтр</li>
+					<li>Нужна возможность постраничной навигации</li>
+					<li>Сортировка колонок</li>
+					<li>Все данные таблицы находятся на клиенте, нет необходимости обращаться к серверу</li>
+					<li>Свобода в изменении HTML-кода таблицы, и вообще кода, связанного с таблицей</li>
+
+				</ul>
+			</p>
+
+			<h3>Требования</h3>
+			<p>
+				Работает с версией AngularJS 1.1.5 и выше.
+			</p>
+
+			<h3>Примеры</h3>
+			<p>
+			<ul>
+				<li>
+					<a href="examples/examples/example01.html" target="_blank">Пример #1</a>:
+					Простая таблица с постраничной навигацией
+				</li>
+				<li>
+					<a href="examples/examples/example02.html" target="_blank">Пример #2</a>:
+					Таблица с постраничной навигацией и сортировкой колонок. Сортировка ASC и DESC.
+				</li>
+				<li>
+					<a href="examples/examples/example03.html" target="_blank">Пример #3</a>:
+					Таблица с постраничной навигацией, сортировкой колонок и живым фильтром по всем колонкам.
+				</li>
+				<li>
+					<a href="examples/examples/example04.html" target="_blank">Пример #4</a>:
+					Таблица с постраничной навигацией, сортировкой колонок, фильтром в виде выпадающего списка, живым фильтром определенным колонкам.
+				</li>
+				<li>
+					<a href="examples/examples/example05.html" target="_blank">Пример #5</a>:
+					В этом примере можно увидеть использование собственного фильтра.
+				</li>
+				<li>
+					<a href="examples/examples/example06.html" target="_blank">Пример #6</a>:
+					Простая таблица с постраничной навигацией
+				</li>
+				<li>
+					<a href="examples/examples/example07.html" target="_blank">Пример #7</a>:
+					Простая таблица с постраничной навигацией
+				</li>
+				<li>
+					<a href="examples/examples/example08.html" target="_blank">Пример #8</a>:
+					Простая таблица с постраничной навигацией
+				</li>
+
+			</ul>
+
+			</p>
+
+			<h3>Что-то еще?</h3>
+			<p>Да. Это все работает с версией AngularJS 1.1.5 и выше. И с русским текстом тоже работает.</p>
+
+
+			<h3>Я хочу использовать свой собственный фильтр!</h3>
+			<p>
+			Да пожалуйста!
+
+<pre style="background:#000;color:#f8f8f8"><span style="color:#e28964">&lt;</span>script<span style="color:#e28964">></span>
+
+    <span style="color:#aeaeae;font-style:italic">// Создаем модуль с фильтрами</span>
+    angular.module(<span style="color:#65b042">"myFilters"</span>, [])
+
+        <span style="color:#aeaeae;font-style:italic">// Показывать только те записи, которые имеют поле year старше заданного</span>
+        .filter(<span style="color:#65b042">"older"</span>, <span style="color:#99cf50">function</span>(){
+            <span style="color:#e28964">return</span> <span style="color:#99cf50">function</span>(items, search){
+
+                <span style="color:#e28964">if</span> (<span style="color:#e28964">!</span>search)
+                    <span style="color:#e28964">return</span> items;
+
+                search <span style="color:#e28964">=</span> <span style="color:#dad085">parseInt</span>(search);
+
+                <span style="color:#99cf50">var</span> <span style="color:#89bdff">test</span> <span style="color:#e28964">=</span> <span style="color:#99cf50">function</span>(el, idx, array){
+                    <span style="color:#e28964">return</span> el.year <span style="color:#e28964">></span> search;
+                };
+
+                <span style="color:#e28964">return</span> items.filter(test);
+            };
+    });
+
+    <span style="color:#aeaeae;font-style:italic">// Здесь приведен код, упрощающий создание нового AngularJS приложения</span>
+    <span style="color:#aeaeae;font-style:italic">// Создаем приложение с именем example01, вставляем его в элемент testApp,</span>
+    <span style="color:#aeaeae;font-style:italic">// добавляем в него таблицу и собственные фильтры</span>
+    AppFactory(<span style="color:#65b042">"testApp"</span>, <span style="color:#65b042">"example05"</span>, [<span style="color:#65b042">"solo.table"</span>, <span style="color:#65b042">"myFilters"</span>]);
+
+<span style="color:#e28964">&lt;</span>/script<span style="color:#e28964">></span>
+</pre>
+
+			А в описание ng-repeat добавить этот фильтр
+<pre style="background:#000;color:#f8f8f8"><span style="color:#e28964">&lt;</span>tr ng<span style="color:#e28964">-</span>repeat<span style="color:#e28964">=</span><span style="color:#65b042">"item in filtered = (original | older:filterModel)"</span> <span style="color:#e28964">></span>
+</pre>
+
+			</p>
+
+			<h3>Постраничная навигация</h3>
+
+			<p>Добавьте этот или похожий HTML-код в любое место между тегами solo-table для отображения ссылок перехода по страницам вашей таблицы.</p>
+<pre class="html4strict" style="font-family:monospace;"><span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">div</span>&gt;</span>
+	<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;&quot;</span> ng-click<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;gotoFirstPage()&quot;</span>&gt;</span>First page | <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span>
+	<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;&quot;</span> ng-click<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;gotoPrevPage()&quot;</span>&gt;</span> <span style="color: #ddbb00;">&amp;larr;</span>prev | <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span>
+	<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;&quot;</span> ng-click<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;gotoNextPage()&quot;</span>&gt;</span>next <span style="color: #ddbb00;">&amp;rarr;</span> | <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span>
+	<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">a</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;&quot;</span> ng-click<span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;gotoLastPage()&quot;</span>&gt;</span>Last page <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">a</span>&gt;</span>
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">div</span>&gt;</span></pre>
+
+
+			<h3>
+				<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span
+							class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+
+			<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects.
+				Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer,
+				and publish. After your page is generated, you can check out the new branch:</p>
+
+<pre><code>
+$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+			<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+			<h3>
+				<a name="designer-templates" class="anchor" href="#designer-templates"><span
+							class="octicon octicon-link"></span></a>Designer Templates</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+			<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through
+				them. You can easily go back to edit your page before publishing. After publishing your page, you can
+				revisit the page generator and switch to another theme. Your Page content will be preserved if it
+				remained markdown format.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+			<h3>
+				<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span
+							class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+			<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your
+				repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages
+				support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll
+				makes it easy to create site-wide headers and footers without having to copy them across every page. It
+				also offers intelligent blog support and other advanced templating features.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+			<h3>
+				<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span
+							class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+			<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to
+				generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the
+				contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a
+						href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a
+						href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a
+						href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+			<h3>
+				<a name="support-or-contact" class="anchor" href="#support-or-contact"><span
+							class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+			<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a>
+				or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.
+			</p>
+		</section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/solo-framework/solo-angular-table/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/solo-framework/solo-angular-table/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+		<aside id="sidebar">
 
-          <p class="repo-owner"><a href="https://github.com/solo-framework/solo-angular-table"></a> is maintained by <a href="https://github.com/solo-framework">solo-framework</a>.</p>
+			<a href="index_en.html" class="button">
+				<small>Read in</small>
+				English
+			</a>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+			<a href="https://github.com/solo-framework/solo-angular-table/zipball/master" class="button">
+				<small>Download</small>
+				.zip file
+			</a>
+			<a href="https://github.com/solo-framework/solo-angular-table/tarball/master" class="button">
+				<small>Download</small>
+				.tar.gz file
+			</a>
 
-  
-  </body>
+			<p class="repo-owner"><a href="https://github.com/solo-framework/solo-angular-table"></a> is maintained by
+				<a href="https://github.com/solo-framework">solo-framework</a>.</p>
+
+			<p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a
+						href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+		</aside>
+	</div>
+</div>
+
+
+</body>
 </html>
