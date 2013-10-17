@@ -168,11 +168,11 @@ angular.module("solo.table", [])
 	 * Эта директива добавляет данные в таблицу
 	 *
 	 * Пример:
-	 * <div bindtabledata>
+	 * <div solo-table-data>
 	 * [{"id":0,"prefix":"Miss","name":"Alvah Gleason","address":"58707 Ophelia Field\nEast Lorena, LA 89754-9301"}]
 	 * </div>
 	 */
-	.directive("bindtabledata", function(){
+	.directive("soloTableData", function(){
 		return {
 			require: "?ngModel",
 			restrict: "A",
@@ -192,25 +192,25 @@ angular.module("solo.table", [])
 	 *
 	 * Пример:
 	 * <tr>
-	 *   <th sort-flag='id'>Id</th>
+	 *   <th sort-by='id'>Id</th>
 	 * </tr>
 	 */
-	.directive("sortFlag", function($compile){
+	.directive("sortBy", function($compile){
 		return {
 			require: "?ngModel",
 			restrict: "A",
 			replace: false,
 			template: function(tElement, tAttrs)
 			{
-				return "<strong class='solo-table-column-cursor' ng-click='orderTableBy(\""+ tAttrs.sortFlag +"\")'>" + tElement.html()+ "</strong>";
+				return "<strong class='solo-table-column-cursor' ng-click='orderTableBy(\""+ tAttrs.sortBy +"\")'>" + tElement.html()+ "</strong>";
 
 			},
 			link: function (scope, elm, attrs, ngm)
 			{
-				if (attrs.sortFlag)
+				if (attrs.sortBy)
 				{
 					elm.append("<span class='solo-column-arrow'></span>");
-					scope.tableHeaders[attrs.sortFlag] = elm;
+					scope.tableHeaders[attrs.sortBy] = elm;
 				}
 			}
 		};
@@ -227,7 +227,7 @@ angular.module("solo.table", [])
 			restrict: "A",
 			link: function (scope, elm, attrs, ngm)
 			{
-				if (attrs.sortFlag)
+				if (attrs.sortBy)
 				{
 					if ("asc" == attrs.defaultSort)
 						scope.order.direction = false;
@@ -235,7 +235,7 @@ angular.module("solo.table", [])
 					if ("desc" == attrs.defaultSort)
 						scope.order.direction = true;
 
-					scope.order.header = attrs.sortFlag;
+					scope.order.header = attrs.sortBy;
 				}
 			}
 		}
@@ -326,7 +326,7 @@ angular.module("solo.table", [])
 	/**
 	 * Базовая директива
 	 *
-	 * <solo-table make-sortable items-on-page = "15">
+	 * <solo-table [items-on-page = "15"] [make-sortable]>
 	 *     ...
 	 * </solo-table>
 	 */
@@ -364,7 +364,6 @@ angular.module("solo.table", [])
 			{
 				var compare = function(val, search)
 				{
-					//return (''+val).toLowerCase().indexOf(search) !== -1;
 					return val.toString().toLowerCase().indexOf(search) !== -1;
 				};
 
