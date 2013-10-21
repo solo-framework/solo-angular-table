@@ -263,89 +263,7 @@ angular.module("solo.table", [])
 			}
 		}
 	})
-	/**
-	 * Указывает, сколько записей д.б. на странице
-	 * Пример: <solo-table items-on-page = "20">
-	 */
-	.directive("itemsOnPage", function(){
-		return {
 
-			restrict: "A",
-			compile: function (elm, attr)
-			{
-				if (attr.itemsOnPage !== 0 && attr.itemsOnPage)
-				{
-					var tr = angular.element( elm.find('tbody').children('tr')[0]);
-					var repeat = tr.attr("ng-repeat");
-					tr.attr("ng-repeat", repeat + " | pager:pager.currentPage:pager.onPage");
-				}
-				return {
-					pre: function preLink(scope, element, attrs)
-					{
-						scope.pager.onPage = parseInt(attrs.itemsOnPage);
-					}
-				};
-			}
-		};
-	})
-	/**
-	 * Директива добавляет возможность сортировки - добавляет в ng-repeat фильтр с направлениями сортировки
-	 */
-	.directive("makeSortable", function(){
-		return {
-			restrict: "A",
-			compile: function (elm, attr)
-			{
-				// добавим возможность сортировки
-				var tr = angular.element( elm.find('tbody').children('tr')[0]);
-				var repeat = tr.attr("ng-repeat");
-				tr.attr("ng-repeat", repeat + " | orderBy:order.header:order.direction");
-
-				// следим за изменениями сортировки
-				return {
-					pre: function preLink(scope, elm, attrs)
-					{
-						scope.setSortMode(attrs.makeSortable);
-
-						scope.$watchCollection("order", function(){
-
-							var resetClasses = function()
-							{
-								for (var i in scope.tableHeaders)
-								{
-									scope.tableHeaders[i].removeClass("solo-table-sort-asc");
-									scope.tableHeaders[i].removeClass("solo-table-sort-desc");
-								}
-							};
-
-							if (scope.order.header == null && scope.order.direction == true)
-							{
-								resetClasses();
-							}
-							else if (scope.order.header)
-							{
-								var el = scope.tableHeaders[scope.order.header];
-								if (!el)
-									return;
-								if (scope.order.direction)
-								{
-
-									resetClasses();
-									el.addClass("solo-table-sort-asc");
-								}
-								else
-								{
-									resetClasses();
-									el.addClass("solo-table-sort-desc");
-								}
-							}
-
-						});
-					}
-				};
-			}
-		};
-	})
 	/**
 	 * Базовая директива
 	 *
@@ -357,7 +275,72 @@ angular.module("solo.table", [])
 		return {
 			require: "?ngModel",
 			restrict: "E",
-			controller: "SoloTableCtrl"
+			controller: "SoloTableCtrl",
+			compile: function (elm, attr)
+			{
+				var tr = angular.element( elm.find('tbody').children('tr')[0]);
+				var repeat = tr.attr("ng-repeat");
+
+				if (attr.hasOwnProperty("makeSortable"))
+				{
+					repeat = repeat + " | orderBy:order.header:order.direction";
+					tr.attr("ng-repeat", repeat);
+				}
+
+				if (attr.hasOwnProperty("itemsOnPage") && attr.itemsOnPage !== 0)
+				{
+					repeat = repeat + " | pager:pager.currentPage:pager.onPage";
+					tr.attr("ng-repeat", repeat);
+				}
+				return {
+					pre: function preLink(scope, element, attr)
+					{
+						// обработка настройки make-sortable
+						if (attr.hasOwnProperty("makeSortable"))
+						{
+							scope.setSortMode(attr.makeSortable);
+
+							scope.$watchCollection("order", function(){
+
+								var resetClasses = function()
+								{
+									for (var i in scope.tableHeaders)
+									{
+										scope.tableHeaders[i].removeClass("solo-table-sort-asc");
+										scope.tableHeaders[i].removeClass("solo-table-sort-desc");
+									}
+								};
+
+								if (scope.order.header == null && scope.order.direction == true)
+								{
+									resetClasses();
+								}
+								else if (scope.order.header)
+								{
+									var el = scope.tableHeaders[scope.order.header];
+									if (!el)
+										return;
+									if (scope.order.direction)
+									{
+										resetClasses();
+										el.addClass("solo-table-sort-asc");
+									}
+									else
+									{
+										resetClasses();
+										el.addClass("solo-table-sort-desc");
+									}
+								}
+
+							});
+						}
+
+						// обработка настройки items-on-page
+						if (attr.hasOwnProperty("itemsOnPage"))
+							scope.pager.onPage = parseInt(attr.itemsOnPage);
+					}
+				};
+			}
 		};
 	})
 
