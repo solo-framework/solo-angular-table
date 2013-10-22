@@ -1,5 +1,28 @@
 /**
- * AngularJS table with filters & sorting
+AngularJS table with filters, sorting and pagination
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Andrey Filippov <solo.framework@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
  */
 
 angular.module("solo.table", [])
@@ -33,10 +56,40 @@ angular.module("solo.table", [])
 		 * @type onPage: number, currentPage: number, found: number, total: Number, foundPages: number
 		 */
 		$scope.pager = {
-			onPage: 10,
-			currentPage: 1,
-			found: 0,
-			foundPages: 0
+			onPage: 10, // сколько записей на странице
+			currentPage: 1, // номер текущей страницы
+			found: 0, // найдено записей
+			foundPages: 0, // количество страниц в таблице
+
+			/**
+			 * Устанавливает количество записей на странице
+			 * @param num int Количество записей на странице
+			 */
+			setOnPage: function(num)
+			{
+				this.onPage = parseInt(num);
+				this.update($scope.filtered.length);
+			},
+
+			/**
+			 * Возвращает количество записей на странице
+			 * @returns int
+			 */
+			getOnPage: function()
+			{
+				return this.onPage;
+			},
+
+			/**
+			 * Обновляет данные пейджера
+			 * @param len int Количество записей в таблице (после применения фильтра)
+			 */
+			update: function(len)
+			{
+				this.found = len;
+				this.foundPages = Math.ceil(len / this.onPage);
+				this.currentPage = 1;
+			}
 		};
 
 		/**
@@ -98,21 +151,9 @@ angular.module("solo.table", [])
 			$scope.pager.currentPage--;
 		};
 
-		/**
-		 * Обновление данных пейджера
-		 *
-		 * @param filteredCount
-		 */
-		$scope.updatePager = function(filteredCount)
-		{
-			$scope.pager.found = filteredCount;
-			$scope.pager.foundPages = Math.ceil(filteredCount / $scope.pager.onPage);
-			$scope.gotoFirstPage();
-		};
-
 		// следим за коллекцией отфильтрованных элементов
 		$scope.$watchCollection("filtered", function (list){
-			$scope.updatePager(list.length);
+			$scope.pager.update(list.length);
 		});
 
 		/**
@@ -240,89 +281,7 @@ angular.module("solo.table", [])
 			}
 		}
 	})
-	/**
-	 * Указывает, сколько записей д.б. на странице
-	 * Пример: <solo-table items-on-page = "20">
-	 */
-	.directive("itemsOnPage", function(){
-		return {
 
-			restrict: "A",
-			compile: function (elm, attr)
-			{
-				if (attr.itemsOnPage !== 0 && attr.itemsOnPage)
-				{
-					var tr = angular.element( elm.find('tbody').children('tr')[0]);
-					var repeat = tr.attr("ng-repeat");
-					tr.attr("ng-repeat", repeat + " | pager:pager.currentPage:pager.onPage");
-				}
-				return {
-					pre: function preLink(scope, element, attrs)
-					{
-						scope.pager.onPage = parseInt(attrs.itemsOnPage);
-					}
-				};
-			}
-		};
-	})
-	/**
-	 * Директива добавляет возможность сортировки - добавляет в ng-repeat фильтр с направлениями сортировки
-	 */
-	.directive("makeSortable", function(){
-		return {
-			restrict: "A",
-			compile: function (elm, attr)
-			{
-				// добавим возможность сортировки
-				var tr = angular.element( elm.find('tbody').children('tr')[0]);
-				var repeat = tr.attr("ng-repeat");
-				tr.attr("ng-repeat", repeat + " | orderBy:order.header:order.direction");
-
-				// следим за изменениями сортировки
-				return {
-					pre: function preLink(scope, elm, attrs)
-					{
-						scope.setSortMode(attrs.makeSortable);
-
-						scope.$watchCollection("order", function(){
-
-							var resetClasses = function()
-							{
-								for (var i in scope.tableHeaders)
-								{
-									scope.tableHeaders[i].removeClass("solo-table-sort-asc");
-									scope.tableHeaders[i].removeClass("solo-table-sort-desc");
-								}
-							};
-
-							if (scope.order.header == null && scope.order.direction == true)
-							{
-								resetClasses();
-							}
-							else if (scope.order.header)
-							{
-								var el = scope.tableHeaders[scope.order.header];
-								if (!el)
-									return;
-								if (scope.order.direction)
-								{
-
-									resetClasses();
-									el.addClass("solo-table-sort-asc");
-								}
-								else
-								{
-									resetClasses();
-									el.addClass("solo-table-sort-desc");
-								}
-							}
-
-						});
-					}
-				};
-			}
-		};
-	})
 	/**
 	 * Базовая директива
 	 *
@@ -334,7 +293,73 @@ angular.module("solo.table", [])
 		return {
 			require: "?ngModel",
 			restrict: "E",
-			controller: "SoloTableCtrl"
+			controller: "SoloTableCtrl",
+			compile: function (elm, attr)
+			{
+				var tr = angular.element( elm.find('tbody').children('tr')[0]);
+				var repeat = tr.attr("ng-repeat");
+
+				if (attr.hasOwnProperty("makeSortable"))
+				{
+					repeat = repeat + " | orderBy:order.header:order.direction";
+					tr.attr("ng-repeat", repeat);
+				}
+
+				if (attr.hasOwnProperty("itemsOnPage") && attr.itemsOnPage !== 0)
+				{
+					repeat = repeat + " | pager:pager.currentPage:pager.getOnPage()";
+					tr.attr("ng-repeat", repeat);
+				}
+				return {
+					pre: function preLink(scope, element, attr)
+					{
+						// обработка настройки make-sortable
+						if (attr.hasOwnProperty("makeSortable"))
+						{
+							scope.setSortMode(attr.makeSortable);
+
+							scope.$watchCollection("order", function(){
+
+								var resetClasses = function()
+								{
+									for (var i in scope.tableHeaders)
+									{
+										scope.tableHeaders[i].removeClass("solo-table-sort-asc");
+										scope.tableHeaders[i].removeClass("solo-table-sort-desc");
+									}
+								};
+
+								if (scope.order.header == null && scope.order.direction == true)
+								{
+									resetClasses();
+								}
+								else if (scope.order.header)
+								{
+									var el = scope.tableHeaders[scope.order.header];
+									if (!el)
+										return;
+									if (scope.order.direction)
+									{
+										resetClasses();
+										el.addClass("solo-table-sort-asc");
+									}
+									else
+									{
+										resetClasses();
+										el.addClass("solo-table-sort-desc");
+									}
+								}
+
+							});
+						}
+
+						// обработка настройки items-on-page
+						if (attr.hasOwnProperty("itemsOnPage"))
+							scope.pager.setOnPage(attr.itemsOnPage);
+							//scope.pager.onPage = parseInt(attr.itemsOnPage);
+					}
+				};
+			}
 		};
 	})
 
