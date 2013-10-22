@@ -296,7 +296,19 @@ angular.module("solo.table", [])
 			controller: "SoloTableCtrl",
 			compile: function (elm, attr)
 			{
-				var tr = angular.element( elm.find('tbody').children('tr')[0]);
+				var tr = null;
+				if (attr.hasOwnProperty("listId"))
+				{
+					tr = angular.element(document.getElementById(attr.listId));
+				}
+				else
+				{
+					tr = angular.element( elm.find('tbody').children('tr')[0]);
+				}
+
+				if (tr.length == 0)
+					throw Error("Can't find element to repeat");
+
 				var repeat = tr.attr("ng-repeat");
 
 				if (attr.hasOwnProperty("makeSortable"))
