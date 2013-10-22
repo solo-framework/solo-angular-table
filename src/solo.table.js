@@ -56,10 +56,40 @@ angular.module("solo.table", [])
 		 * @type onPage: number, currentPage: number, found: number, total: Number, foundPages: number
 		 */
 		$scope.pager = {
-			onPage: 10,
-			currentPage: 1,
-			found: 0,
-			foundPages: 0
+			onPage: 10, // сколько записей на странице
+			currentPage: 1, // номер текущей страницы
+			found: 0, // найдено записей
+			foundPages: 0, // количество страниц в таблице
+
+			/**
+			 * Устанавливает количество записей на странице
+			 * @param num int Количество записей на странице
+			 */
+			setOnPage: function(num)
+			{
+				this.onPage = parseInt(num);
+				this.update($scope.filtered.length);
+			},
+
+			/**
+			 * Возвращает количество записей на странице
+			 * @returns int
+			 */
+			getOnPage: function()
+			{
+				return this.onPage;
+			},
+
+			/**
+			 * Обновляет данные пейджера
+			 * @param len int Количество записей в таблице (после применения фильтра)
+			 */
+			update: function(len)
+			{
+				this.found = len;
+				this.foundPages = Math.ceil(len / this.onPage);
+				this.currentPage = 1;
+			}
 		};
 
 		/**
@@ -121,21 +151,9 @@ angular.module("solo.table", [])
 			$scope.pager.currentPage--;
 		};
 
-		/**
-		 * Обновление данных пейджера
-		 *
-		 * @param filteredCount
-		 */
-		$scope.updatePager = function(filteredCount)
-		{
-			$scope.pager.found = filteredCount;
-			$scope.pager.foundPages = Math.ceil(filteredCount / $scope.pager.onPage);
-			$scope.gotoFirstPage();
-		};
-
 		// следим за коллекцией отфильтрованных элементов
 		$scope.$watchCollection("filtered", function (list){
-			$scope.updatePager(list.length);
+			$scope.pager.update(list.length);
 		});
 
 		/**
@@ -289,7 +307,7 @@ angular.module("solo.table", [])
 
 				if (attr.hasOwnProperty("itemsOnPage") && attr.itemsOnPage !== 0)
 				{
-					repeat = repeat + " | pager:pager.currentPage:pager.onPage";
+					repeat = repeat + " | pager:pager.currentPage:pager.getOnPage()";
 					tr.attr("ng-repeat", repeat);
 				}
 				return {
@@ -337,7 +355,8 @@ angular.module("solo.table", [])
 
 						// обработка настройки items-on-page
 						if (attr.hasOwnProperty("itemsOnPage"))
-							scope.pager.onPage = parseInt(attr.itemsOnPage);
+							scope.pager.setOnPage(attr.itemsOnPage);
+							//scope.pager.onPage = parseInt(attr.itemsOnPage);
 					}
 				};
 			}
