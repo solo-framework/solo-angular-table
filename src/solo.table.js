@@ -401,6 +401,9 @@ angular.module("solo.table", [])
 			{
 				var compare = function(val, search)
 				{
+                    // null hasn't method toString()
+                    if ( val == null )
+                        return false;
 					return val.toString().toLowerCase().indexOf(search) !== -1;
 				};
 
