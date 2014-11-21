@@ -6,7 +6,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
-	<script src="js/angular-1.1.5.js" ></script>
+	<script src="js/angular.js" ></script>
+	<script src="js/angular-sanitize.js" ></script>
 
 	<script src="js/app.factory.js" ></script>
 	<script src="../src/solo.table.js"></script>
@@ -66,7 +67,7 @@
 				-->
 				<solo-table items-on-page = "10" make-sortable>
 
-					<input placeholder="Filter by all columns" type="text" name="id" ng-model="filter.">
+					<input placeholder="Filter by all columns" type="text" name="id" ng-model="filterModel">
 
 					<!--
 						Эта директива выступает провайдером данных
@@ -98,10 +99,10 @@
 
 						Для подветки найденной подстроки используется директива ng-bind-html-unsafe
 						-->
-						<tr ng-repeat="item in filtered = (original | filter:filter)" >
+						<tr ng-repeat="item in filtered = (original | filter:filterModel)" >
 							<td><[item.id]></td>
-							<td ng-bind-html-unsafe="item.name | highlight:filter."></td>
-							<td ng-bind-html-unsafe="item.address | highlight:filter."></td>
+							<td ng-bind-html="item.name|highlight:filterModel"></td>
+							<td ng-bind-html="item.address|highlight:filterModel"></td>
 						</tr>
 
 					</table>
@@ -126,23 +127,23 @@
 
 	angular.module("myFilters", [])
 
-		.filter("highlight", function(){
+		.filter("highlight", ['$sce', function($sce){
 				return function(text, search){
 
 					if (!search)
 						return text;
 
-					var arr = text.split(search);
-					var res = "<strong style='color: red;'>" + search + "</strong>";
-					var out = arr.join(res);
-					return out;
+					var re = new RegExp('('+ search +')', 'gi');
+					var out = text.replace(re, "<strong style='color: red;'>$1</strong>");
+
+					return $sce.trustAsHtml(out);
 				};
-			});
+			}]);
 
 	// Здесь приведен код, упрощающий создание нового AngularJS приложения
 	// Создаем приложение с именем example, вставляем его в элемент testApp,
 	// добавляем в него таблицу
-	AppFactory("testApp", "example", ["solo.table", "myFilters"]);
+	AppFactory("testApp", "example", ["solo.table", "myFilters", "ngSanitize"]);
 
 </script>
 
