@@ -51,6 +51,16 @@ angular.module("solo.table", [])
 		$scope.tableHeaders = {};
 
 		/**
+		 * Проверка переданного параметра на принадлежность к promise-объекту
+		 *
+		 * @param variableToCheck
+		 * @returns {*|boolean}
+		 */
+		$scope.isPromise = function(variableToCheck) {
+			return (variableToCheck && angular.isFunction(variableToCheck.then));
+		};
+
+		/**
 		 * Описание пейджера
 		 *
 		 * @type onPage: number, currentPage: number, found: number, total: Number, foundPages: number
@@ -222,8 +232,16 @@ angular.module("solo.table", [])
 				//elm.hide();
 				elm.css({"display" : "none"});
 
-				var json = angular.fromJson(elm.html());
-				scope.bindData(json);
+				if (!!attrs.soloTableData) {
+					scope.$watch(attrs.soloTableData, function (value){
+						if (!scope.isPromise(value)) {
+							scope.bindData(value);
+						}
+					});
+				} else {
+					var json = angular.fromJson(elm.html());
+					scope.bindData(json);
+				}
 			}
 		};
 	})
