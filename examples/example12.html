@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Solo Table: example 12</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<script src="js/angular.js" ></script>
+	<script src="js/angular-sanitize.js" ></script>
+
+	<script src="js/app.factory.js" ></script>
+	<script src="../src/solo.table.js"></script>
+
+
+	<!-- Эти стили нужны для сортировки -->
+	<style type="text/css">
+		.solo-table-sort-asc > .solo-column-arrow
+		{
+			position: relative;
+			top: 10px;
+			margin-left: 5px;
+			border-color: black transparent;
+			border-style: solid;
+			border-width: 5px 5px 0px 5px;
+			height: 0px;
+			width: 0px;
+		}
+		.solo-table-sort-desc > .solo-column-arrow
+		{
+			position: relative;
+			top: -10px;
+			margin-left: 5px;
+			border-color: black transparent;
+			border-style: solid;
+			border-width: 0px 5px 5px 5px;
+			height: 0px;
+			width: 0px;
+		}
+
+		.solo-table-column-cursor
+		{
+			cursor: pointer;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+
+			<h2>Example #12</h2>
+
+			<p>
+				You can pass your data into grid via JSON object
+			</p>
+
+            <!-- В этом элементе будет находиться наше AngularJS приложение. Через ng-init мы задаем данные для грида -->
+            <div id="testApp" ng-cloak ng-init='myFakeData = [{"id": 1, "name": "West Fletcher", "address": "509 Senator Street, Santel, California, 7321"}, {"id": 2, "name": "Liza Nelson", "address": "643 Amboy Street, Marshall, Tennessee, 1601"}, {"id": 3, "name": "Keisha Nixon", "address": "107 Downing Street, Osmond, Mississippi, 1474"}, {"id": 4, "name": "Clark Klein", "address": "483 Anthony Street, Springville, Georgia, 6223"}, {"id": 5, "name": "Rhea Raymond", "address": "955 Chase Court, Detroit, New Jersey, 3863"}, {"id": 6, "name": "Diana Schultz", "address": "319 Pineapple Street, Cavalero, Massachusetts, 3262"}, {"id": 7, "name": "Acevedo Rogers", "address": "619 Anchorage Place, Alamo, Palau, 7577"}, {"id": 8, "name": "Hawkins Walton", "address": "660 Allen Avenue, Williams, Illinois, 9167"}, {"id": 9, "name": "Morales Prince", "address": "792 Meadow Street, Gordon, Kansas, 2548"}, {"id": 10, "name": "Warner Frederick", "address": "147 Cadman Plaza, Kerby, Wyoming, 836"}, {"id": 11, "name": "Cherry Pacheco", "address": "305 Tapscott Avenue, Broadlands, Maine, 1017"}, {"id": 12, "name": "Skinner Stokes", "address": "818 Gunther Place, Madrid, North Carolina, 7819"}, {"id": 13, "name": "Farley Buckley", "address": "176 Elliott Walk, Gilmore, Oklahoma, 6501"}, {"id": 14, "name": "Jensen Hatfield", "address": "810 Lynch Street, Greenbackville, Louisiana, 2744"}, {"id": 15, "name": "Stacey Knapp", "address": "274 Emerald Street, Norwood, Nebraska, 9819"}, {"id": 16, "name": "Melba Wells", "address": "905 Flatbush Avenue, Dale, Montana, 5541"}, {"id": 17, "name": "Terra Donovan", "address": "267 Haring Street, Fairhaven, Colorado, 1030"}, {"id": 18, "name": "House Rodriguez", "address": "892 Dunne Court, Benson, Federated States Of Micronesia, 6575"}, {"id": 19, "name": "Abigail Snider", "address": "328 Riverdale Avenue, Bourg, Washington, 6516"}, {"id": 20, "name": "Della Hawkins", "address": "245 Halleck Street, Westerville, Arizona, 1306"}, {"id": 21, "name": "Molly Duffy", "address": "484 Seagate Terrace, Seymour, Nevada, 9272"}, {"id": 22, "name": "Carson Shaffer", "address": "430 Hubbard Place, Winfred, Arkansas, 1679"}, {"id": 23, "name": "Candice Kidd", "address": "672 Mill Street, Bartley, South Dakota, 4864"}, {"id": 24, "name": "Arlene Nguyen", "address": "635 Coffey Street, Springhill, Virgin Islands, 6640"}, {"id": 25, "name": "Juliette Boyd", "address": "489 Estate Road, Lacomb, Hawaii, 7046"}, {"id": 26, "name": "Rhodes Barry", "address": "120 Louisiana Avenue, Tivoli, Delaware, 1192"}, {"id": 27, "name": "Fern Albert", "address": "955 Beacon Court, Sterling, West Virginia, 4289"}, {"id": 28, "name": "Beach Holder", "address": "979 Grove Place, Malott, Kentucky, 1468"}, {"id": 29, "name": "Mcfarland White", "address": "454 Knickerbocker Avenue, Kapowsin, Utah, 6921"}, {"id": 30, "name": "Shelton Roach", "address": "689 Ruby Street, Longbranch, Idaho, 6206"}, {"id": 31, "name": "Weaver Henry", "address": "455 Holly Street, Bath, New Mexico, 5596"}, {"id": 32, "name": "Gardner Mckinney", "address": "160 Lawn Court, Dunbar, South Carolina, 2953"}, {"id": 33, "name": "Underwood Bruce", "address": "810 Kent Street, Manila, New York, 412"}]'>
+
+				<!--
+					Внутри этой директивы должен быть тег table
+					Здесь директива items-on-page определяет, сколько записей должно быть на странице
+					Директива make-sortable указывает, что в таблицу надо добавить возможность сортировки
+				-->
+				<solo-table items-on-page = "10" make-sortable>
+
+					<input placeholder="Filter by all columns" type="text" name="id" ng-model="filterModel">
+
+					<!--
+						Эта директива выступает провайдером данных
+						Здесь данные получаются из myFakeData
+					 -->
+					<div solo-table-data="myFakeData"></div>
+
+					<!-- Показываем данные пейджинга: сколько всего страниц, на какой находимся, сколько записей во всей таблице -->
+					<div>Page <[pager.currentPage]> of <[pager.foundPages]>. Total items:  <[pager.found]></div>
+
+					<!-- Эта таблица обязательно  должна присутствовать в директиве solo-table, что, в общем то, очевидно. -->
+					<table class="table table-striped table-bordered" >
+						<thead>
+						<tr>
+							<!-- У каждой колонки, которую мы хотим сортировать,
+							нужно указать директиву sort-by='имя_поля_из_solo-table-data' -->
+							<th sort-by='id' default-sort="asc">Id</th>
+							<th sort-by='name'>Name</th>
+							<th>Address</th>
+						</tr>
+						</thead>
+
+						<!--
+
+						В атрибуте контроллера "original" содержатся все данные, предоставленные провайдером solo-table-data.
+						В атрибуте "filtered" - данные из original, к которым применен фильтр
+
+						Для подветки найденной подстроки используется директива ng-bind-html-unsafe
+						-->
+						<tr ng-repeat="item in filtered = (original | filter:filterModel)" >
+							<td><[item.id]></td>
+							<td ng-bind-html="item.name|highlight:filterModel"></td>
+							<td ng-bind-html="item.address|highlight:filterModel"></td>
+						</tr>
+
+					</table>
+
+					<!-- Здесь реализован переход по страницам -->
+					<div>
+						<a href="" solo-table-first-page ng-click="gotoFirstPage()">First page | </a>
+						<a href="" ng-click="gotoPrevPage()"> &larr;prev | </a>
+						<a href="" ng-click="gotoNextPage()">next &rarr; | </a>
+						<a href="" ng-click="gotoLastPage()">Last page </a>
+					</div>
+
+				</solo-table>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+
+	angular.module("myFilters", [])
+
+		.filter("highlight", ['$sce', function($sce){
+				return function(text, search){
+
+					if (!search)
+						return text;
+
+					var re = new RegExp('('+ search +')', 'gi');
+					var out = text.replace(re, "<strong style='color: red;'>$1</strong>");
+
+					return $sce.trustAsHtml(out);
+				};
+			}]);
+
+	// Здесь приведен код, упрощающий создание нового AngularJS приложения
+	// Создаем приложение с именем example, вставляем его в элемент testApp,
+	// добавляем в него таблицу
+	AppFactory("testApp", "example", ["solo.table", "myFilters", "ngSanitize"]);
+
+</script>
+
+</body>
+</html>
