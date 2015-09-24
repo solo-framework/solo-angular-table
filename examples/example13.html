@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Solo Table: example 13</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+	<script src="js/angular.js" ></script>
+	<script src="js/app.factory.js" ></script>
+	<script src="../src/solo.table.js" ></script>
+
+</head>
+<body>
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+
+			<h2>Example #13</h2>
+
+			<p>
+				You can place more then one independent tables within an application.
+			</p>
+
+			<h2>The first table</h2>
+
+			<!-- В этом элементе будет находиться наше AngularJS приложение -->
+			<div id="testApp" ng-cloak>
+
+				<!--
+					Внутри этой директивы должен быть тег table
+					Здесь параметр items-on-page определяет, сколько записей должно быть на странице
+
+					scope="true" создает независимый scope
+				-->
+				<solo-table scope="true" items-on-page = "10">
+
+					<!--
+						Эта директива выступает провайдером данных
+						Здесь данные в формате JSON
+					 -->
+					<div solo-table-data>
+						[{"id":0,"name":"Arnoldo Rodriguez","address":"41709 Ruthe Squares\nNew Jensen, NC 27708-7727"},{"id":1,"name":"Mrs. Lolita Dare","address":"295 Luettgen Ports\nCristview, CA 87559-2576"},{"id":2,"name":"Xzavier Bernhard","address":"8019 Greenfelder Canyon\nWest Jailynville, NY 34198"},{"id":3,"name":"Dr. Cesar Bins IV","address":"62882 Altenwerth Glens\nWest Madelineborough, AL 39472"},{"id":4,"name":"Earlene Bashirian MD","address":"9062 West Glens\nHellerville, WV 62908"},{"id":5,"name":"Mrs. Deonte Schowalter Sr.","address":"7489 Johns Turnpike Apt. 888\nStellaville, KS 05548-3835"},{"id":6,"name":"Mrs. Gudrun Homenick III","address":"84378 Cheyenne Village Suite 360\nFraneckimouth, MT 42064-2302"},{"id":7,"name":"Jett Reinger Jr.","address":"111 Hessel Harbors\nKelliemouth, NY 15021-9741"},{"id":8,"name":"Flavie Considine","address":"134 Garth Branch Apt. 081\nEnricoport, UT 73395"},{"id":9,"name":"Samson Strosin I","address":"3549 Agustin Groves Apt. 585\nEast Davionberg, SC 61631"},{"id":10,"name":"Ibrahim Kovacek","address":"3612 Dameon Rapid\nMariaburgh, AL 75957"},{"id":11,"name":"Scottie Corwin","address":"56685 Chaya Divide\nNorth Efren, WA 54313-9459"},{"id":12,"name":"Mr. Bo Rohan","address":"367 Bart Burgs\nOmerview, CT 41188-6752"},{"id":13,"name":"Jonathon McDermott","address":"140 Langosh Prairie Suite 399\nWest Alicechester, FM 93748"},{"id":14,"name":"Walton Glover MD","address":"9530 Leland Drive\nPort Raoulside, AA 93586"},{"id":15,"name":"Eddie Keebler","address":"250 Dietrich Dale\nHirtheshire, PA 04190"},{"id":16,"name":"Arden Kuhn III","address":"64225 Jeremie Club Apt. 086\nNorth Percystad, SC 84598"},{"id":17,"name":"Simone Towne","address":"3824 Hintz Shores\nEast Davefurt, LA 77432"},{"id":18,"name":"Alexane Johnson","address":"2725 Bayer Parkway\nEast Bustershire, MS 73226"},{"id":19,"name":"Dr. Virginia Ernser","address":"427 Mitchell Flat Apt. 739\nKarleymouth, AP 50738"},{"id":20,"name":"Aylin Harris","address":"37552 Leuschke Village\nBruenville, MS 14407-2651"},{"id":21,"name":"Ms. Noemi Ernser MD","address":"01522 Brakus Brooks\nLake Kariville, OH 26193"},{"id":22,"name":"Mr. Hipolito Kreiger","address":"264 Bradtke Flats Apt. 238\nLake Colton, AZ 27335-4520"},{"id":23,"name":"Lester Little II","address":"634 Torphy Vista Apt. 209\nAnikaborough, FM 72133"},{"id":24,"name":"Khalil Cartwright","address":"97743 Ritchie Estates Suite 269\nPacochaside, VI 58454"},{"id":25,"name":"Rhiannon Hilpert","address":"12711 Jast Mission Apt. 552\nHalvorsonport, CO 63911-6993"},{"id":26,"name":"Salvatore Windler","address":"175 Elnora Crescent Apt. 218\nDelilahfort, WY 39740-7196"},{"id":27,"name":"Keanu Ernser","address":"1660 Llewellyn Manors\nNew Carolyn, MH 57551-1665"},{"id":28,"name":"Stephan Grady","address":"59054 Chaz Oval Apt. 062\nSouth Eldachester, SC 82692"},{"id":29,"name":"Emmy Turcotte","address":"597 Derek Mission Apt. 948\nLake Kaylihaven, MO 08821"},{"id":30,"name":"Watson Cronin I","address":"7323 Schmitt Mall Apt. 991\nPort Libbie, ND 08985"},{"id":31,"name":"Amiya Stark","address":"27777 Bruen Crossroad Apt. 709\nConroyville, NC 09344"},{"id":32,"name":"Mekhi Wunsch","address":"2298 Moshe Loop Suite 765\nEast Roosevelt, MO 97426-9701"},{"id":33,"name":"Nettie Ward","address":"790 Raoul Fields\nMalloryhaven, NJ 84610-1427"},{"id":34,"name":"Hilma Mertz","address":"0640 Eloise Port\nFermintown, MD 65364-2505"},{"id":35,"name":"Mr. Evie Kassulke Jr.","address":"0087 Andrew Lock Apt. 503\nDeshawntown, VT 86862-9721"},{"id":36,"name":"Litzy Koch","address":"811 Mosciski Rapid\nNew Marietta, VT 92078"},{"id":37,"name":"Ocie Littel","address":"740 Magdalena Camp Suite 369\nArmstrongshire, SD 76246"},{"id":38,"name":"Billy Langosh","address":"8207 Reynold Inlet Apt. 402\nWest Cristina, TX 52378"},{"id":39,"name":"Miss Kolby Krajcik","address":"06873 Clarabelle Oval\nNew Miracletown, OR 96947-2216"},{"id":40,"name":"Brennan Wolf","address":"85114 Valentin Bridge\nJordanfurt, ID 43773-7961"},{"id":41,"name":"Dr. Darrin Krajcik III","address":"762 Kuvalis Drive Apt. 977\nPort Larissa, WV 16524-3868"},{"id":42,"name":"Dr. Sean McCullough","address":"6697 Marks Pass\nNorth Alexzander, NH 65878-1152"},{"id":43,"name":"Harold Rath","address":"06499 Catharine Squares Suite 823\nMohammedburgh, AZ 56747"},{"id":44,"name":"Miss Herbert Thiel","address":"30904 Schaden Road Apt. 825\nBergstromshire, FL 65165-3611"},{"id":45,"name":"Zoey Kertzmann","address":"416 Lia Divide Apt. 677\nParisianfort, IA 82666"},{"id":46,"name":"Judge Bailey","address":"263 Stiedemann Shoals\nBlancaside, OH 69150-5172"},{"id":47,"name":"Miss Theodore Sporer","address":"9921 Lynch Forge\nLake Luramouth, NJ 07679-7707"},{"id":48,"name":"Valerie Macejkovic","address":"48822 Clemens Crossing\nHeathcotetown, VI 61556"},{"id":49,"name":"Savanah Gleason","address":"80499 Frami Street Suite 846\nLake Shane, OH 30357"},{"id":50,"name":"Evan White Sr.","address":"99192 Cory Skyway\nWest Daphneyton, GU 28770-6211"},{"id":51,"name":"Mrs. Orval Crist","address":"55420 Mathew Ferry Apt. 567\nDereckland, CO 69609-9284"},{"id":52,"name":"Naomie Walker","address":"0282 Tromp Ridge\nWest Kim, OH 65782-9698"},{"id":53,"name":"Miss Aubree Wiegand","address":"6228 Kuhlman Village\nWest Emerson, MT 77135-4833"},{"id":54,"name":"Lester Reichert","address":"934 Bulah Ford\nArvillaport, PR 71606-5461"},{"id":55,"name":"Mr. Conrad Abernathy DVM","address":"235 Wiegand Creek Apt. 009\nDonnellyhaven, MO 70649"},{"id":56,"name":"Garfield Bins","address":"2394 Sabrina Lake\nYasminville, TN 89051"},{"id":57,"name":"Otilia Goyette","address":"9218 Powlowski Ford\nLake Carolynechester, AZ 33602-5551"},{"id":58,"name":"Adrienne Hoppe","address":"22957 O'Kon Center Apt. 484\nClementinefurt, NJ 25587"},{"id":59,"name":"Sarah Legros","address":"11554 Kelly Extension\nLavernetown, MA 38206-0678"},{"id":60,"name":"Erna Crooks","address":"679 Emard Landing Suite 810\nAnselville, KS 02665-1629"},{"id":61,"name":"Euna Labadie","address":"801 Treutel Run Apt. 354\nJaketon, FM 45245-9247"},{"id":62,"name":"Jon Goldner III","address":"17839 Shana Fork Apt. 850\nLake Justonmouth, AR 90716-0403"},{"id":63,"name":"Niko Hilpert","address":"33616 Rodriguez Place Apt. 786\nOkunevamouth, AR 78889"},{"id":64,"name":"Randi Jenkins","address":"632 Paucek Circles\nLake Nicholeborough, MH 73696"},{"id":65,"name":"Lucie Jaskolski","address":"51214 Virgie Cliffs\nHoegerport, AS 11714"},{"id":66,"name":"George Howe","address":"739 Jedediah Motorway\nLindgrenhaven, WI 94261"},{"id":67,"name":"Floyd Steuber","address":"138 Ally Locks\nAllanborough, AS 13887-8545"},{"id":68,"name":"Liam Altenwerth PhD","address":"75548 Simonis Island Suite 551\nBrownmouth, AA 12503"},{"id":69,"name":"Mireya Zboncak","address":"06898 Dach Bridge\nNew Madyson, MD 57114-0145"},{"id":70,"name":"Ephraim Ondricka PhD","address":"7699 Lucas Stravenue\nSouth Montanashire, NH 67432"},{"id":71,"name":"Herta Welch","address":"4223 Nikolaus Manor Apt. 586\nOsinskishire, MH 42503-3311"},{"id":72,"name":"Dr. Kariane Bauch","address":"3728 Rodger Road Suite 581\nGeorgettehaven, ND 78217"},{"id":73,"name":"Kip Franecki I","address":"069 Cremin Dale Apt. 482\nNew Theresa, PA 57783"},{"id":74,"name":"Antwan Oberbrunner","address":"364 Imelda Ridges Apt. 076\nHermistonborough, IL 21867"},{"id":75,"name":"Therese Prohaska","address":"465 Jaquan Summit\nHomenickview, IA 84652-6678"},{"id":76,"name":"Kirsten Monahan","address":"670 Mandy Meadow\nNew Shirley, MI 50950"},{"id":77,"name":"Zelma Mueller","address":"522 Jeremy Overpass\nEast Eladiofort, RI 17429-7457"},{"id":78,"name":"Corbin Klein","address":"4321 Bradtke Center Suite 471\nKacieville, RI 69465-8089"},{"id":79,"name":"Amir McLaughlin","address":"2324 Schinner Causeway Suite 169\nWest Favian, WY 22557-0562"},{"id":80,"name":"Jamarcus Kuvalis","address":"468 Crona Mills\nSchusterborough, AE 36000"},{"id":81,"name":"Lorna Borer","address":"267 Bechtelar Trafficway Apt. 654\nEriktown, AK 03032-8254"},{"id":82,"name":"Herman Hermann II","address":"3947 Matteo Gardens Apt. 087\nLake Danaside, NY 00145"},{"id":83,"name":"Mrs. Kyleigh Prohaska MD","address":"472 Stamm Stream\nNorth Rory, TN 78686-7453"},{"id":84,"name":"Sean Turcotte","address":"44864 Ziemann Course Apt. 435\nMcLaughlinborough, WY 77356"},{"id":85,"name":"Marilou Waelchi","address":"656 Buckridge Vista\nWest Marjorie, HI 85546-5534"},{"id":86,"name":"Dr. Dora Feeney IV","address":"9891 Elisabeth Trail Suite 245\nNorth Fosterfort, NC 48947"},{"id":87,"name":"Maureen Kutch Jr.","address":"77627 Larkin Course Suite 714\nKobeland, NH 40825-9586"},{"id":88,"name":"Erik Champlin","address":"261 Connie Loop Suite 162\nWest Maybell, AA 60566-8075"},{"id":89,"name":"Deondre Koss","address":"969 Buddy Ford Apt. 031\nPort Diegoport, KS 30227-0453"},{"id":90,"name":"Mr. Christopher White","address":"35053 Greenholt Land\nEdythechester, AP 15307-6529"},{"id":91,"name":"Jamir Quigley","address":"25107 Smitham Creek Suite 712\nNorth Rahulhaven, OH 74745"},{"id":92,"name":"Ms. Bette Hartmann","address":"652 Murphy Loop\nConcepcionmouth, PA 02132"},{"id":93,"name":"Brendon Block V","address":"9860 Windler Lane\nShanieview, VI 79753-2409"},{"id":94,"name":"Miss Jess Kling","address":"333 Lincoln Flats\nIsaiasstad, ND 28346-3251"},{"id":95,"name":"Maxie Gleason","address":"218 Schuster Meadow\nPort Keatonchester, AL 88656"},{"id":96,"name":"Sheridan Carroll IV","address":"51659 Miller Island Suite 899\nDickichester, PW 54694"},{"id":97,"name":"Dr. Adalberto Mraz MD","address":"15060 Syble Forest Apt. 927\nNorth Daphneburgh, GU 24812-8021"},{"id":98,"name":"Sigmund Effertz","address":"197 Runolfsdottir Plain\nGroverport, VI 53448"},{"id":99,"name":"Ms. Magali Treutel","address":"41345 Reilly Plaza Apt. 978\nSouth Wendellstad, GU 84864-5926"}]
+					</div>
+
+					<!-- Показываем данные пейджинга: сколько всего страниц, на какой находимся, сколько записей во всей таблице -->
+					<div>Page <[pager.currentPage]> of <[pager.foundPages]>. Total items:  <[pager.found]></div>
+
+					<!-- Эта таблица обязательно  должна присутствовать в директиве solo-table, что, в общем то, очевидно. -->
+					<table class="table table-striped table-bordered" >
+						<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Address</th>
+						</tr>
+						</thead>
+
+						<!--
+
+						В атрибуте контроллера "original" содержатся все данные, предоставленные провайдером solo-table-data.
+						В атрибуте "filtered" - отфильтрованные данные, но т.к. у нас простейший пример и никаких фильтров нет,
+						то filtered идентичен original
+						-->
+						<tr ng-repeat="item in filtered = original" >
+							<td><[item.id]></td>
+							<td><[item.name]></td>
+							<td><[item.address]></td>
+						</tr>
+
+					</table>
+
+					<!-- Здесь реализован переход по страницам -->
+					<div>
+						<a href="" ng-click="gotoFirstPage()">First page | </a>
+						<a href="" ng-click="gotoPrevPage()"> &larr;prev | </a>
+						<a href="" ng-click="gotoNextPage()">next &rarr; | </a>
+						<a href="" ng-click="gotoLastPage()">Last page </a>
+					</div>
+
+				</solo-table>
+
+
+				<h2>The second table</h2>
+				<solo-table scope="true" items-on-page = "10">
+
+					<!--
+						Эта директива выступает провайдером данных
+						Здесь данные в формате JSON
+					 -->
+					<div solo-table-data>
+						[{"id":11,"name":"Scottie Corwin","address":"56685 Chaya Divide\nNorth Efren, WA 54313-9459"},{"id":12,"name":"Mr. Bo Rohan","address":"367 Bart Burgs\nOmerview, CT 41188-6752"},{"id":13,"name":"Jonathon McDermott","address":"140 Langosh Prairie Suite 399\nWest Alicechester, FM 93748"},{"id":14,"name":"Walton Glover MD","address":"9530 Leland Drive\nPort Raoulside, AA 93586"},{"id":15,"name":"Eddie Keebler","address":"250 Dietrich Dale\nHirtheshire, PA 04190"},{"id":16,"name":"Arden Kuhn III","address":"64225 Jeremie Club Apt. 086\nNorth Percystad, SC 84598"},{"id":17,"name":"Simone Towne","address":"3824 Hintz Shores\nEast Davefurt, LA 77432"},{"id":18,"name":"Alexane Johnson","address":"2725 Bayer Parkway\nEast Bustershire, MS 73226"},{"id":19,"name":"Dr. Virginia Ernser","address":"427 Mitchell Flat Apt. 739\nKarleymouth, AP 50738"},{"id":20,"name":"Aylin Harris","address":"37552 Leuschke Village\nBruenville, MS 14407-2651"},{"id":21,"name":"Ms. Noemi Ernser MD","address":"01522 Brakus Brooks\nLake Kariville, OH 26193"},{"id":22,"name":"Mr. Hipolito Kreiger","address":"264 Bradtke Flats Apt. 238\nLake Colton, AZ 27335-4520"},{"id":23,"name":"Lester Little II","address":"634 Torphy Vista Apt. 209\nAnikaborough, FM 72133"},{"id":24,"name":"Khalil Cartwright","address":"97743 Ritchie Estates Suite 269\nPacochaside, VI 58454"},{"id":25,"name":"Rhiannon Hilpert","address":"12711 Jast Mission Apt. 552\nHalvorsonport, CO 63911-6993"},{"id":26,"name":"Salvatore Windler","address":"175 Elnora Crescent Apt. 218\nDelilahfort, WY 39740-7196"},{"id":27,"name":"Keanu Ernser","address":"1660 Llewellyn Manors\nNew Carolyn, MH 57551-1665"},{"id":28,"name":"Stephan Grady","address":"59054 Chaz Oval Apt. 062\nSouth Eldachester, SC 82692"},{"id":29,"name":"Emmy Turcotte","address":"597 Derek Mission Apt. 948\nLake Kaylihaven, MO 08821"},{"id":30,"name":"Watson Cronin I","address":"7323 Schmitt Mall Apt. 991\nPort Libbie, ND 08985"},{"id":31,"name":"Amiya Stark","address":"27777 Bruen Crossroad Apt. 709\nConroyville, NC 09344"},{"id":32,"name":"Mekhi Wunsch","address":"2298 Moshe Loop Suite 765\nEast Roosevelt, MO 97426-9701"},{"id":33,"name":"Nettie Ward","address":"790 Raoul Fields\nMalloryhaven, NJ 84610-1427"},{"id":34,"name":"Hilma Mertz","address":"0640 Eloise Port\nFermintown, MD 65364-2505"},{"id":35,"name":"Mr. Evie Kassulke Jr.","address":"0087 Andrew Lock Apt. 503\nDeshawntown, VT 86862-9721"},{"id":36,"name":"Litzy Koch","address":"811 Mosciski Rapid\nNew Marietta, VT 92078"},{"id":37,"name":"Ocie Littel","address":"740 Magdalena Camp Suite 369\nArmstrongshire, SD 76246"},{"id":38,"name":"Billy Langosh","address":"8207 Reynold Inlet Apt. 402\nWest Cristina, TX 52378"},{"id":39,"name":"Miss Kolby Krajcik","address":"06873 Clarabelle Oval\nNew Miracletown, OR 96947-2216"},{"id":40,"name":"Brennan Wolf","address":"85114 Valentin Bridge\nJordanfurt, ID 43773-7961"},{"id":41,"name":"Dr. Darrin Krajcik III","address":"762 Kuvalis Drive Apt. 977\nPort Larissa, WV 16524-3868"},{"id":42,"name":"Dr. Sean McCullough","address":"6697 Marks Pass\nNorth Alexzander, NH 65878-1152"},{"id":43,"name":"Harold Rath","address":"06499 Catharine Squares Suite 823\nMohammedburgh, AZ 56747"},{"id":44,"name":"Miss Herbert Thiel","address":"30904 Schaden Road Apt. 825\nBergstromshire, FL 65165-3611"},{"id":45,"name":"Zoey Kertzmann","address":"416 Lia Divide Apt. 677\nParisianfort, IA 82666"},{"id":46,"name":"Judge Bailey","address":"263 Stiedemann Shoals\nBlancaside, OH 69150-5172"},{"id":47,"name":"Miss Theodore Sporer","address":"9921 Lynch Forge\nLake Luramouth, NJ 07679-7707"},{"id":48,"name":"Valerie Macejkovic","address":"48822 Clemens Crossing\nHeathcotetown, VI 61556"},{"id":49,"name":"Savanah Gleason","address":"80499 Frami Street Suite 846\nLake Shane, OH 30357"},{"id":50,"name":"Evan White Sr.","address":"99192 Cory Skyway\nWest Daphneyton, GU 28770-6211"},{"id":51,"name":"Mrs. Orval Crist","address":"55420 Mathew Ferry Apt. 567\nDereckland, CO 69609-9284"},{"id":52,"name":"Naomie Walker","address":"0282 Tromp Ridge\nWest Kim, OH 65782-9698"},{"id":53,"name":"Miss Aubree Wiegand","address":"6228 Kuhlman Village\nWest Emerson, MT 77135-4833"},{"id":54,"name":"Lester Reichert","address":"934 Bulah Ford\nArvillaport, PR 71606-5461"},{"id":55,"name":"Mr. Conrad Abernathy DVM","address":"235 Wiegand Creek Apt. 009\nDonnellyhaven, MO 70649"},{"id":56,"name":"Garfield Bins","address":"2394 Sabrina Lake\nYasminville, TN 89051"},{"id":57,"name":"Otilia Goyette","address":"9218 Powlowski Ford\nLake Carolynechester, AZ 33602-5551"},{"id":58,"name":"Adrienne Hoppe","address":"22957 O'Kon Center Apt. 484\nClementinefurt, NJ 25587"},{"id":59,"name":"Sarah Legros","address":"11554 Kelly Extension\nLavernetown, MA 38206-0678"},{"id":60,"name":"Erna Crooks","address":"679 Emard Landing Suite 810\nAnselville, KS 02665-1629"},{"id":61,"name":"Euna Labadie","address":"801 Treutel Run Apt. 354\nJaketon, FM 45245-9247"},{"id":62,"name":"Jon Goldner III","address":"17839 Shana Fork Apt. 850\nLake Justonmouth, AR 90716-0403"},{"id":63,"name":"Niko Hilpert","address":"33616 Rodriguez Place Apt. 786\nOkunevamouth, AR 78889"},{"id":64,"name":"Randi Jenkins","address":"632 Paucek Circles\nLake Nicholeborough, MH 73696"},{"id":65,"name":"Lucie Jaskolski","address":"51214 Virgie Cliffs\nHoegerport, AS 11714"},{"id":66,"name":"George Howe","address":"739 Jedediah Motorway\nLindgrenhaven, WI 94261"},{"id":67,"name":"Floyd Steuber","address":"138 Ally Locks\nAllanborough, AS 13887-8545"},{"id":68,"name":"Liam Altenwerth PhD","address":"75548 Simonis Island Suite 551\nBrownmouth, AA 12503"},{"id":69,"name":"Mireya Zboncak","address":"06898 Dach Bridge\nNew Madyson, MD 57114-0145"},{"id":70,"name":"Ephraim Ondricka PhD","address":"7699 Lucas Stravenue\nSouth Montanashire, NH 67432"},{"id":71,"name":"Herta Welch","address":"4223 Nikolaus Manor Apt. 586\nOsinskishire, MH 42503-3311"},{"id":72,"name":"Dr. Kariane Bauch","address":"3728 Rodger Road Suite 581\nGeorgettehaven, ND 78217"},{"id":73,"name":"Kip Franecki I","address":"069 Cremin Dale Apt. 482\nNew Theresa, PA 57783"},{"id":74,"name":"Antwan Oberbrunner","address":"364 Imelda Ridges Apt. 076\nHermistonborough, IL 21867"},{"id":75,"name":"Therese Prohaska","address":"465 Jaquan Summit\nHomenickview, IA 84652-6678"},{"id":76,"name":"Kirsten Monahan","address":"670 Mandy Meadow\nNew Shirley, MI 50950"},{"id":77,"name":"Zelma Mueller","address":"522 Jeremy Overpass\nEast Eladiofort, RI 17429-7457"},{"id":78,"name":"Corbin Klein","address":"4321 Bradtke Center Suite 471\nKacieville, RI 69465-8089"},{"id":79,"name":"Amir McLaughlin","address":"2324 Schinner Causeway Suite 169\nWest Favian, WY 22557-0562"},{"id":80,"name":"Jamarcus Kuvalis","address":"468 Crona Mills\nSchusterborough, AE 36000"},{"id":81,"name":"Lorna Borer","address":"267 Bechtelar Trafficway Apt. 654\nEriktown, AK 03032-8254"},{"id":82,"name":"Herman Hermann II","address":"3947 Matteo Gardens Apt. 087\nLake Danaside, NY 00145"},{"id":83,"name":"Mrs. Kyleigh Prohaska MD","address":"472 Stamm Stream\nNorth Rory, TN 78686-7453"},{"id":84,"name":"Sean Turcotte","address":"44864 Ziemann Course Apt. 435\nMcLaughlinborough, WY 77356"},{"id":85,"name":"Marilou Waelchi","address":"656 Buckridge Vista\nWest Marjorie, HI 85546-5534"},{"id":86,"name":"Dr. Dora Feeney IV","address":"9891 Elisabeth Trail Suite 245\nNorth Fosterfort, NC 48947"},{"id":87,"name":"Maureen Kutch Jr.","address":"77627 Larkin Course Suite 714\nKobeland, NH 40825-9586"},{"id":88,"name":"Erik Champlin","address":"261 Connie Loop Suite 162\nWest Maybell, AA 60566-8075"},{"id":89,"name":"Deondre Koss","address":"969 Buddy Ford Apt. 031\nPort Diegoport, KS 30227-0453"},{"id":90,"name":"Mr. Christopher White","address":"35053 Greenholt Land\nEdythechester, AP 15307-6529"},{"id":91,"name":"Jamir Quigley","address":"25107 Smitham Creek Suite 712\nNorth Rahulhaven, OH 74745"},{"id":92,"name":"Ms. Bette Hartmann","address":"652 Murphy Loop\nConcepcionmouth, PA 02132"},{"id":93,"name":"Brendon Block V","address":"9860 Windler Lane\nShanieview, VI 79753-2409"},{"id":94,"name":"Miss Jess Kling","address":"333 Lincoln Flats\nIsaiasstad, ND 28346-3251"},{"id":95,"name":"Maxie Gleason","address":"218 Schuster Meadow\nPort Keatonchester, AL 88656"},{"id":96,"name":"Sheridan Carroll IV","address":"51659 Miller Island Suite 899\nDickichester, PW 54694"},{"id":97,"name":"Dr. Adalberto Mraz MD","address":"15060 Syble Forest Apt. 927\nNorth Daphneburgh, GU 24812-8021"},{"id":98,"name":"Sigmund Effertz","address":"197 Runolfsdottir Plain\nGroverport, VI 53448"},{"id":99,"name":"Ms. Magali Treutel","address":"41345 Reilly Plaza Apt. 978\nSouth Wendellstad, GU 84864-5926"}]
+					</div>
+
+					<!-- Показываем данные пейджинга: сколько всего страниц, на какой находимся, сколько записей во всей таблице -->
+					<div>Page <[pager.currentPage]> of <[pager.foundPages]>. Total items:  <[pager.found]></div>
+
+					<!-- Эта таблица обязательно  должна присутствовать в директиве solo-table, что, в общем то, очевидно. -->
+					<table class="table table-striped table-bordered" >
+						<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Address</th>
+						</tr>
+						</thead>
+
+						<!--
+
+						В атрибуте контроллера "original" содержатся все данные, предоставленные провайдером solo-table-data.
+						В атрибуте "filtered" - отфильтрованные данные, но т.к. у нас простейший пример и никаких фильтров нет,
+						то filtered идентичен original
+						-->
+						<tr ng-repeat="item in filtered = original" >
+							<td><[item.id]></td>
+							<td><[item.name]></td>
+							<td><[item.address]></td>
+						</tr>
+
+					</table>
+
+					<!-- Здесь реализован переход по страницам -->
+					<div>
+						<a href="" ng-click="gotoFirstPage()">First page | </a>
+						<a href="" ng-click="gotoPrevPage()"> &larr;prev | </a>
+						<a href="" ng-click="gotoNextPage()">next &rarr; | </a>
+						<a href="" ng-click="gotoLastPage()">Last page </a>
+					</div>
+
+				</solo-table>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+
+	// Здесь приведен код, упрощающий создание нового AngularJS приложения
+	// Создаем приложение с именем example, вставляем его в элемент testApp,
+	// добавляем в него таблицу
+	AppFactory("testApp", "example", ["solo.table"]);
+
+</script>
+
+</body>
+</html>

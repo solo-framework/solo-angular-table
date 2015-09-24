@@ -303,17 +303,29 @@ angular.module("solo.table", [])
 	/**
 	 * Базовая директива
 	 *
-	 * <solo-table [items-on-page = "15"] [make-sortable]>
+	 * <solo-table [scope="true|false"] [items-on-page = "15"] [make-sortable]>
 	 *     ...
 	 * </solo-table>
 	 */
 	.directive("soloTable", function(){
-		return {
+
+		var config = {
 			require: "?ngModel",
 			restrict: "E",
+			scope: false,
 			controller: "SoloTableCtrl",
 			compile: function (elm, attr)
 			{
+				// scope: true - the directive creates a new child scope that prototypically inherits
+				// from the parent scope. If more than one directive (on the same DOM element) requests a new scope,
+				// only one new child scope is created. Since we have "normal" prototypal inheritance,
+				// this is like ng-include and ng-switch, so be wary of 2-way data binding to parent scope primitives,
+				// and child scope hiding/shadowing of parent scope properties.
+				if (attr.hasOwnProperty("scope"))
+				{
+					this.scope = (attr.scope == "true")? true : false;
+				}
+
 				var tr = null;
 				if (attr.hasOwnProperty("listId"))
 				{
@@ -391,6 +403,7 @@ angular.module("solo.table", [])
 				};
 			}
 		};
+		return config;
 	})
 
 	/**
